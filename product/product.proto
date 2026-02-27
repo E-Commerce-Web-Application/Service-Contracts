@@ -5,6 +5,13 @@ package products;
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
+service ProductService {
+  rpc CreateProduct (ProductCreateRequest) returns (ProductResponse);
+  rpc GetProduct (ProductIdRequest) returns (ProductResponse);
+  rpc GetAllProducts (google.protobuf.Empty) returns (ProductListResponse);
+  rpc UpdateProduct (ProductUpdateRequest) returns (ProductUpdateResponse);
+  rpc DeleteProduct (ProductIdRequest) returns (DeleteResponse);
+}
 
 message ProductCreateRequest {
   optional string seller_id = 1;
@@ -48,12 +55,3 @@ message ProductUpdateResponse {
 message DeleteResponse {
   string message = 1;
 }
-
-service ProductService {
-  rpc CreateProduct (ProductCreateRequest) returns (ProductResponse);
-  rpc GetProduct (ProductIdRequest) returns (ProductResponse);
-  rpc GetAllProducts (google.protobuf.Empty) returns (ProductListResponse);
-  rpc UpdateProduct (ProductUpdateRequest) returns (ProductUpdateResponse);
-  rpc DeleteProduct (ProductIdRequest) returns (DeleteResponse);
-}
-
