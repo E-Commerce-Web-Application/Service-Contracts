@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package app.generated.shop;
 
-option python_package = "app.generated.shop";
-
 import "google/protobuf/timestamp.proto";
 
 service ShopService {
