@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package app.generated.shop;
+package contracts.shop;
 
 import "google/protobuf/timestamp.proto";
 
