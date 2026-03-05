@@ -3,7 +3,7 @@ syntax = "proto3";
 package cart;
 
 
-import "google.protobuf/timestamp.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "cartpb";
 
