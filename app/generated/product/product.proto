@@ -11,6 +11,7 @@ service ProductService {
   rpc GetAllProducts (google.protobuf.Empty) returns (ProductListResponse);
   rpc UpdateProduct (ProductUpdateRequest) returns (ProductUpdateResponse);
   rpc DeleteProduct (ProductIdRequest) returns (DeleteResponse);
+  rpc GetProductsFromShopID (ShopID) returns (ProductListResponse);
 }
 
 message ProductCreateRequest {
@@ -54,4 +55,8 @@ message ProductUpdateResponse {
 
 message DeleteResponse {
   string message = 1;
+}
+
+message ShopID {
+  string id = 1;
 }

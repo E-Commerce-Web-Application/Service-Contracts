@@ -4,25 +4,20 @@ package review;
 
 import "google/protobuf/timestamp.proto";
 
-// The Review Service definition
+
 service ReviewService {
-  // ➤ Create Review
   rpc CreateReview (CreateReviewRequest) returns (Review);
 
-  // ➤ Get Reviews by Product (with pagination)
   rpc GetReviewsByProduct (GetReviewsRequest) returns (GetReviewsResponse);
 
-  // ➤ Get Average Rating
   rpc GetAverageRating (GetAverageRatingRequest) returns (AverageRatingResponse);
 
-  // ➤ Update Review
   rpc UpdateReview (UpdateReviewRequest) returns (Review);
 
-  // ➤ Delete Review
   rpc DeleteReview (DeleteReviewRequest) returns (DeleteReviewResponse);
-}
 
-// --- Message Definitions ---
+  rpc GetReviewsFromShopID (ShopID) returns (GetReviewsResponse);
+}
 
 message Review {
   string id = 1;
@@ -63,17 +58,20 @@ message AverageRatingResponse {
 
 message UpdateReviewRequest {
   string id = 1;
-  string user_id = 2; // Required because your code checks { _id: id, userId: req.user.id }
+  string user_id = 2;
   int32 rating = 3;
   string comment = 4;
 }
 
 message DeleteReviewRequest {
   string id = 1;
-  string user_id = 2; // Required because your code checks { _id: id, userId: req.user.id }
+  string user_id = 2;
 }
 
 message DeleteReviewResponse {
   string message = 1;
 }
 
+message ShopID {
+  string id = 1;
+}
