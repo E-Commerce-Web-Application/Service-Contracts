@@ -8,25 +8,30 @@ import "google/protobuf/timestamp.proto";
 service ReviewService {
   rpc CreateReview (CreateReviewRequest) returns (Review);
 
+  rpc CreateShopReview (CreateShopReviewRequest) returns (Review);
+
   rpc GetReviewsByProduct (GetReviewsRequest) returns (GetReviewsResponse);
 
+  rpc GetReviewsByShopId (GetReviewsByShopIdRequest) returns (GetReviewsResponse);
+
   rpc GetAverageRating (GetAverageRatingRequest) returns (AverageRatingResponse);
+
+  rpc GetAverageRatingByShopId (GetAverageRatingByShopIdRequest) returns (AverageRatingResponse);
 
   rpc UpdateReview (UpdateReviewRequest) returns (Review);
 
   rpc DeleteReview (DeleteReviewRequest) returns (DeleteReviewResponse);
-
-  rpc GetReviewsFromShopID (ShopID) returns (GetReviewsResponse);
 }
 
 message Review {
   string id = 1;
   string product_id = 2;
-  string user_id = 3;
-  int32 rating = 4;
-  string comment = 5;
-  google.protobuf.Timestamp created_at = 6;
-  google.protobuf.Timestamp updated_at = 7;
+  string shop_id = 3;
+  string user_id = 4;
+  int32 rating = 5;
+  string comment = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
 }
 
 message CreateReviewRequest {
@@ -36,8 +41,21 @@ message CreateReviewRequest {
   string comment = 4;
 }
 
+message CreateShopReviewRequest {
+  string shop_id = 1;
+  string user_id = 2;
+  int32 rating = 3;
+  string comment = 4;
+}
+
 message GetReviewsRequest {
   string product_id = 1;
+  int32 page = 2;
+  int32 limit = 3;
+}
+
+message GetReviewsByShopIdRequest {
+  string shop_id = 1;
   int32 page = 2;
   int32 limit = 3;
 }
@@ -50,10 +68,15 @@ message GetAverageRatingRequest {
   string product_id = 1;
 }
 
+message GetAverageRatingByShopIdRequest {
+  string shop_id = 1;
+}
+
 message AverageRatingResponse {
   string product_id = 1;
-  float avg_rating = 2;
-  int32 total_reviews = 3;
+  string shop_id = 2;
+  float avg_rating = 3;
+  int32 total_reviews = 4;
 }
 
 message UpdateReviewRequest {
@@ -70,8 +93,4 @@ message DeleteReviewRequest {
 
 message DeleteReviewResponse {
   string message = 1;
-}
-
-message ShopID {
-  string id = 1;
 }
